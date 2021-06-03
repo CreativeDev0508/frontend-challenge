@@ -62,6 +62,7 @@ export interface Patient {
   id: Id
   picture: Picture
   nat: string
+  fullName: string
 }
 
 export interface Info {

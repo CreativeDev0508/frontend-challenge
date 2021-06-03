@@ -44,12 +44,17 @@ export default defineComponent({
       page.value += 1
 
       setTimeout(async () => {
-        const additionalItems = await fetchPatients($axios, page.value).then(
+        const additionalPatients = await fetchPatients($axios, page.value).then(
           (res) => res.results
         )
 
-        if (additionalItems.length) {
-          patients.value.push(...additionalItems)
+        if (additionalPatients.length) {
+          const updatedPatients = additionalPatients.map((patient) => ({
+            ...patient,
+            fullName: `${patient.name.first} ${patient.name.last}`,
+          }))
+
+          patients.value.push(...updatedPatients)
           $state.loaded()
         } else {
           $state.complete()
@@ -58,8 +63,13 @@ export default defineComponent({
     }
 
     useFetch(async () => {
-      patients.value = await fetchPatients($axios, page.value).then(
-        (res) => res.results
+      patients.value = await fetchPatients($axios, page.value).then((res) =>
+        res.results.map((patient) => {
+          return {
+            ...patient,
+            fullName: `${patient.name.first} ${patient.name.last}`,
+          }
+        })
       )
     })
 

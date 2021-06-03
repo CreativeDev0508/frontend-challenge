@@ -5,7 +5,7 @@
       class="table-cell p-2 border border-primary-500"
       data-test="name"
     >
-      {{ fullName }}
+      {{ patient.fullName }}
     </div>
     <div
       v-if="isDesktopOrTablet"
@@ -32,7 +32,9 @@
       v-if="!isDesktopOrTablet"
       class="table-cell text-center p-2 border border-primary-500"
     >
-      <p class="text-lg font-semibold" data-test="name">{{ fullName }}</p>
+      <p class="text-lg font-semibold" data-test="name">
+        {{ patient.fullName }}
+      </p>
       <span class="capitalize" data-test="gender">{{ patient.gender }} - </span>
       <span data-test="birthday">{{ birthday }}</span>
     </div>
@@ -61,10 +63,6 @@ export default defineComponent({
     const context = useContext()
     const isDesktopOrTablet = context.$device.isDesktopOrTablet
 
-    const fullName = computed(() => {
-      return `${props.patient.name.first} ${props.patient.name.last}`
-    })
-
     const birthday = computed(() => {
       const [year, month, day] = props.patient.dob.date.split('-')
       return [month, day.slice(0, 2), year].join('/')
@@ -72,7 +70,6 @@ export default defineComponent({
 
     return {
       isDesktopOrTablet,
-      fullName,
       birthday,
     }
   },

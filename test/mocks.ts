@@ -44,6 +44,7 @@ export const patient = {
     thumbnail: 'https://randomuser.me/api/portraits/thumb/women/85.jpg',
   },
   nat: 'ES',
+  fullName: 'Silvia Castillo',
 }
 
 export const patients = [
@@ -93,6 +94,7 @@ export const patients = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/women/85.jpg',
     },
     nat: 'ES',
+    fullName: 'Silvia Castillo',
   },
   {
     gender: 'female',
@@ -140,5 +142,6 @@ export const patients = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/women/27.jpg',
     },
     nat: 'GB',
+    fullName: 'Barbara Douglas',
   },
 ]
