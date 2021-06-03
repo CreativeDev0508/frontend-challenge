@@ -1,6 +1,12 @@
 <template>
   <div>
-    <Header />
+    <TheHeader />
     <Nuxt />
   </div>
 </template>
+
+<style>
+html {
+  @apply text-primary-500;
+}
+</style>
