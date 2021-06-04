@@ -36,6 +36,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
+import { FilterTag } from './types'
 
 export default defineComponent({
   props: {
