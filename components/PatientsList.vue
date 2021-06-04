@@ -1,5 +1,13 @@
 <template>
-  <div class="w-full flex justify-center">
+  <div class="w-full">
+    <p
+      v-if="isListEmpty"
+      class="my-4 text-lg text-center"
+      data-test="not-found-message"
+    >
+      No results found.
+    </p>
+
     <div
       v-if="isDesktopOrTablet"
       class="hidden text-center border-collapse md:table"
@@ -22,13 +30,16 @@
     </div>
 
     <div v-else class="w-full table text-center border-collapse md:hidden">
-      <div class="table-header-group border border-primary-500">
+      <div
+        v-if="!isListEmpty"
+        class="table-header-group border border-primary-500"
+      >
         <div class="table-row font-semibold bg-primary-500 text-white">
           <div class="table-cell p-2 border-r border-white">Patient</div>
           <div class="table-cell p-2">Actions</div>
         </div>
       </div>
-      <ul class="table-row-group">
+      <ul v-if="!isListEmpty" class="table-row-group">
         <PatientItem
           v-for="patient in patients"
           :key="patient.dob.date"
@@ -40,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import { computed, defineComponent, useContext } from '@nuxtjs/composition-api'
 import PatientItem from './PatientItem.vue'
 import { Patient } from './types'
 
@@ -53,12 +64,14 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(props) {
     const context = useContext()
     const isDesktopOrTablet = context.$device.isDesktopOrTablet
+    const isListEmpty = computed(() => !props.patients.length)
 
     return {
       isDesktopOrTablet,
+      isListEmpty,
     }
   },
 })
