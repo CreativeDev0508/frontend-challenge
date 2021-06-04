@@ -40,4 +40,25 @@ describe('PatientsList', () => {
       '04/20/1996'
     )
   })
+
+  it('returns message when list is empty', () => {
+    const wrapper = mount(PatientsList, {
+      propsData: {
+        patients: [],
+      },
+      mocks: {
+        $nuxt: {
+          context: {
+            $device: {
+              isDesktopOrTablet: false,
+            },
+          },
+        },
+      },
+    })
+
+    expect(wrapper.find('[data-test="not-found-message"]').text()).toBe(
+      'No results found.'
+    )
+  })
 })
