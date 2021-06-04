@@ -9,9 +9,14 @@
 
     <div v-else class="flex w-full flex-col items-center">
       <SearchBar @search="handleSearch" />
+      <GenderFilter
+        class="my-2 mb-4"
+        :tag="currentTag"
+        @change-filter="handleFilter"
+      />
 
       <PatientsListShimmer v-if="isLoading" />
-      <PatientsList :patients="filteredPatients" />
+      <PatientsList :patients="patients" />
 
       <button
         class="btn"
@@ -51,15 +56,24 @@
 import { defineComponent, onMounted } from '@nuxtjs/composition-api'
 import usePatients from '@/composables/usePatients'
 import usePatientSearch from '@/composables/usePatientSearch'
+import useGenderFilter from '@/composables/useGenderFilter'
+import { FilterTag } from '~/components/types'
 
 export default defineComponent({
   setup() {
     const { getPatients, patients, isLoading, error } = usePatients()
     const { searchQuery, patientsMatchingSearchQuery } =
       usePatientSearch(patients)
+    const { currentTag, filteredPatients } = useGenderFilter(
+      patientsMatchingSearchQuery
+    )
 
     const handleSearch = (query: string): void => {
       searchQuery.value = query
+    }
+
+    const handleFilter = (tag: FilterTag): void => {
+      currentTag.value = tag
     }
 
     const reloadPage = () => {
@@ -72,11 +86,13 @@ export default defineComponent({
 
     return {
       handleSearch,
-      filteredPatients: patientsMatchingSearchQuery,
+      handleFilter,
+      patients: filteredPatients,
       getPatients,
       isLoading,
       error,
       reloadPage,
+      currentTag,
     }
   },
 })

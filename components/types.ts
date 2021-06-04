@@ -76,3 +76,5 @@ export interface ApiResponse {
   results: Patient[]
   info: Info
 }
+
+export type FilterTag = 'all' | 'female' | 'male'
