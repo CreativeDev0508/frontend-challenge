@@ -14,8 +14,8 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
     "core-js": "^3.9.1",
-    "nuxt": "^2.15.3",
-    "vue-infinite-loading": "^2.4.5"
+    "i18n-iso-countries": "^6.7.0",
+    "nuxt": "^2.15.3"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex justify-center">
+  <div class="w-full flex justify-center">
     <div class="hidden text-center border-collapse md:table">
       <div class="table-header-group border border-primary-500">
         <div class="table-row font-semibold bg-primary-500 text-white">

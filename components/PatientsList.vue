@@ -1,5 +1,5 @@
 <template>
-  <div class="patient-list p-4 flex justify-center">
+  <div class="w-full flex justify-center">
     <div
       v-if="isDesktopOrTablet"
       class="hidden text-center border-collapse md:table"

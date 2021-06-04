@@ -1,81 +1,82 @@
 <template>
-  <div>
-    <PatientsListShimmer v-if="$fetchState.pending" />
-    <p v-else-if="$fetchState.error" class="py-14 text-center">
-      Error while fetching patients.
-    </p>
-    <div v-else>
-      <PatientsList :patients="patients" />
-      <InfiniteLoading class="mt-4 mb-8" @infinite="loadMorePatients">
-        <div
-          slot="spinner"
-          class="flex justify-center text-primary-500 text-lg"
-        >
-          <TheSpinner />
-          <p class="ml-2">Loading More...</p>
-        </div>
-        <div slot="no-more">No more results.</div>
-        <div slot="no-results">No patients found.</div>
-      </InfiniteLoading>
+  <main class="flex flex-col p-4 items-center">
+    <div v-if="error" class="flex flex-col items-center py-14">
+      <p class="text-center text-lg">
+        Something went wrong. Please, try again.
+      </p>
+      <button class="btn" @click="reloadPage">Reload</button>
     </div>
-  </div>
+
+    <div v-else class="flex w-full flex-col items-center">
+      <SearchBar @search="handleSearch" />
+
+      <PatientsListShimmer v-if="isLoading" />
+      <PatientsList :patients="filteredPatients" />
+
+      <button
+        class="btn"
+        :class="{
+          'cursor-not-allowed': isLoading,
+          'cursor-pointer': !isLoading,
+        }"
+        @click="getPatients"
+      >
+        <svg
+          v-if="isLoading"
+          class="animate-spin -ml-1 mr-3 h-5 w-5 text-secondary-500"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        {{ isLoading ? 'Loading...' : 'Load more' }}
+      </button>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  useContext,
-  useFetch,
-} from '@nuxtjs/composition-api'
-import InfiniteLoading, { StateChanger } from 'vue-infinite-loading'
-import { fetchPatients } from '@/api/patients'
-import { Patient } from '~/components/types'
+import { defineComponent, onMounted } from '@nuxtjs/composition-api'
+import usePatients from '@/composables/usePatients'
+import usePatientSearch from '@/composables/usePatientSearch'
 
 export default defineComponent({
-  components: { InfiniteLoading },
   setup() {
-    const patients = ref<Patient[]>([])
-    const page = ref(1)
+    const { getPatients, patients, isLoading, error } = usePatients()
+    const { searchQuery, patientsMatchingSearchQuery } =
+      usePatientSearch(patients)
 
-    const { $axios } = useContext()
-
-    const loadMorePatients = ($state: StateChanger) => {
-      page.value += 1
-
-      setTimeout(async () => {
-        const additionalPatients = await fetchPatients($axios, page.value).then(
-          (res) => res.results
-        )
-
-        if (additionalPatients.length) {
-          const updatedPatients = additionalPatients.map((patient) => ({
-            ...patient,
-            fullName: `${patient.name.first} ${patient.name.last}`,
-          }))
-
-          patients.value.push(...updatedPatients)
-          $state.loaded()
-        } else {
-          $state.complete()
-        }
-      }, 500)
+    const handleSearch = (query: string): void => {
+      searchQuery.value = query
     }
 
-    useFetch(async () => {
-      patients.value = await fetchPatients($axios, page.value).then((res) =>
-        res.results.map((patient) => {
-          return {
-            ...patient,
-            fullName: `${patient.name.first} ${patient.name.last}`,
-          }
-        })
-      )
+    const reloadPage = () => {
+      window.location.reload()
+    }
+
+    onMounted(() => {
+      getPatients()
     })
 
     return {
-      patients,
-      loadMorePatients,
+      handleSearch,
+      filteredPatients: patientsMatchingSearchQuery,
+      getPatients,
+      isLoading,
+      error,
+      reloadPage,
     }
   },
 })
