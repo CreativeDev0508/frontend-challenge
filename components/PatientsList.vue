@@ -65,9 +65,11 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const context = useContext()
-    const isDesktopOrTablet = context.$device.isDesktopOrTablet
     const isListEmpty = computed(() => !props.patients.length)
+
+    const context = useContext()
+
+    const isDesktopOrTablet = context.$device.isDesktopOrTablet
 
     return {
       isDesktopOrTablet,

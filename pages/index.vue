@@ -1,5 +1,9 @@
 <template>
   <main class="flex flex-col p-4 items-center">
+    <BaseModal v-if="visible">
+      <PatientDetails :patient="selectedPatient" />
+    </BaseModal>
+
     <div v-if="error" class="flex flex-col items-center py-14">
       <p class="text-center text-lg">
         Something went wrong. Please, try again.
@@ -57,6 +61,7 @@ import { defineComponent, onMounted } from '@nuxtjs/composition-api'
 import usePatients from '@/composables/usePatients'
 import usePatientSearch from '@/composables/usePatientSearch'
 import useGenderFilter from '@/composables/useGenderFilter'
+import useModal from '~/composables/useModal'
 import { FilterTag } from '~/components/types'
 
 export default defineComponent({
@@ -67,6 +72,7 @@ export default defineComponent({
     const { currentTag, filteredPatients } = useGenderFilter(
       patientsMatchingSearchQuery
     )
+    const { visible, selectedPatient } = useModal()
 
     const handleSearch = (query: string): void => {
       searchQuery.value = query
@@ -93,6 +99,8 @@ export default defineComponent({
       error,
       reloadPage,
       currentTag,
+      visible,
+      selectedPatient,
     }
   },
 })

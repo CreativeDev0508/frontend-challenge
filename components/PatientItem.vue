@@ -42,13 +42,19 @@
       v-if="!isDesktopOrTablet"
       class="table-cell align-middle text-center p-2 border border-primary-500"
     >
-      <button class="text-xl underline">View</button>
+      <button
+        class="btn-outline text-xl underline border-none"
+        @click="selectPatient(patient)"
+      >
+        View
+      </button>
     </div>
   </li>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, useContext } from '@nuxtjs/composition-api'
+import useModal from '@/composables/useModal'
 import { Patient } from './types'
 
 export default defineComponent({
@@ -61,6 +67,7 @@ export default defineComponent({
   },
   setup(props) {
     const context = useContext()
+    const { selectPatient } = useModal()
     const isDesktopOrTablet = context.$device.isDesktopOrTablet
 
     const birthday = computed(() => {
@@ -71,6 +78,7 @@ export default defineComponent({
     return {
       isDesktopOrTablet,
       birthday,
+      selectPatient,
     }
   },
 })
