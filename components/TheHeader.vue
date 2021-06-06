@@ -1,8 +1,6 @@
 <template>
   <header class="flex justify-between items-center px-4 bg-primary-500 h-11">
-    <NuxtLink to="/" title="Home">
-      <Logo />
-    </NuxtLink>
+    <Logo />
     <svg
       class="h-7 w-7 fill-current fill-white"
       viewBox="0 0 26 26"
