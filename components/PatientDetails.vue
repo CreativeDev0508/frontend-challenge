@@ -31,6 +31,7 @@
       </div>
 
       <button
+        v-focus
         class="btn-outline border-none p-0"
         aria-label="close"
         title="Close"
