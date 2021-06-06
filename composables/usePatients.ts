@@ -6,17 +6,13 @@ import { Patient } from '~/components/types'
 export default function usePatients() {
   const patients = ref<Patient[]>([])
   const page = ref(0)
-  const isLoading = ref(false)
+  const isLoading = ref(true)
   const error = ref(false)
 
   const { $axios } = useContext()
   countries.registerLocale(require('i18n-iso-countries/langs/en.json'))
 
   const getPatients = async () => {
-    if (isLoading.value) {
-      return
-    }
-
     page.value += 1
     isLoading.value = true
 

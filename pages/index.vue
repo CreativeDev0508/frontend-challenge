@@ -28,6 +28,7 @@
           'cursor-not-allowed': isLoading,
           'cursor-pointer': !isLoading,
         }"
+        :disabled="isLoading"
         @click="getPatients"
       >
         <svg
