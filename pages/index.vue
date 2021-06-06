@@ -62,8 +62,8 @@ import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
 import usePatients from '@/composables/usePatients'
 import usePatientSearch from '@/composables/usePatientSearch'
 import useGenderFilter from '@/composables/useGenderFilter'
-import useModal from '~/composables/useModal'
-import { FilterTag } from '~/components/types'
+import useModal from '@/composables/useModal'
+import { FilterTag } from '@/components/types'
 
 export default defineComponent({
   setup() {

@@ -1,7 +1,7 @@
 import { fetchPatients } from '@/api/patients'
 import { ref, useContext } from '@nuxtjs/composition-api'
 import countries from 'i18n-iso-countries'
-import { Patient } from '~/components/types'
+import { Patient } from '@/components/types'
 
 const isLoading = ref(true)
 

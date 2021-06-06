@@ -52,9 +52,9 @@
 
 <script lang="ts">
 import { computed, defineComponent, useContext } from '@nuxtjs/composition-api'
+import usePatients from '@/composables/usePatients'
 import PatientItem from './PatientItem.vue'
 import { Patient } from './types'
-import usePatients from '~/composables/usePatients'
 
 export default defineComponent({
   name: 'PatientsList',

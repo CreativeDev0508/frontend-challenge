@@ -1,5 +1,5 @@
 import { readonly, ref } from '@nuxtjs/composition-api'
-import { Patient } from '~/components/types'
+import { Patient } from '@/components/types'
 
 const visible = ref(false)
 const selectedPatient = ref<Patient>()
