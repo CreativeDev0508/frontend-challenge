@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full">
+  <div class="w-full flex flex-col justify-center items-center">
     <p
-      v-if="isListEmpty"
+      v-if="isListEmpty && !isLoading"
       class="my-4 text-lg text-center"
       data-test="not-found-message"
     >
@@ -9,12 +9,12 @@
     </p>
 
     <div
-      v-if="isDesktopOrTablet"
-      class="hidden text-center border-collapse md:table"
+      v-if="isDesktopOrTablet && !isListEmpty"
+      class="mt-4 text-center border-collapse w-full max-w-lg lg:max-w-xl"
     >
       <div class="table-header-group border border-primary-500">
         <div class="table-row font-semibold bg-primary-500 text-white">
-          <div class="table-cell p-2 border-r border-white">Name</div>
+          <div class="table-cell p-2 border-r border-white w-full">Name</div>
           <div class="table-cell p-2 border-r border-white">Gender</div>
           <div class="table-cell p-2 border-r border-white">Birthday</div>
           <div class="table-cell p-2">Actions</div>
@@ -29,17 +29,17 @@
       </ul>
     </div>
 
-    <div v-else class="w-full table text-center border-collapse md:hidden">
-      <div
-        v-if="!isListEmpty"
-        class="table-header-group border border-primary-500"
-      >
+    <div
+      v-if="!isDesktopOrTablet && !isListEmpty"
+      class="w-full table text-center border-collapse"
+    >
+      <div class="table-header-group border border-primary-500">
         <div class="table-row font-semibold bg-primary-500 text-white">
           <div class="table-cell p-2 border-r border-white">Patient</div>
           <div class="table-cell p-2">Actions</div>
         </div>
       </div>
-      <ul v-if="!isListEmpty" class="table-row-group">
+      <ul class="table-row-group">
         <PatientItem
           v-for="patient in patients"
           :key="patient.dob.date"
@@ -54,6 +54,7 @@
 import { computed, defineComponent, useContext } from '@nuxtjs/composition-api'
 import PatientItem from './PatientItem.vue'
 import { Patient } from './types'
+import usePatients from '~/composables/usePatients'
 
 export default defineComponent({
   name: 'PatientsList',
@@ -65,7 +66,8 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const isListEmpty = computed(() => !props.patients.length)
+    const isListEmpty = computed(() => props.patients.length === 0)
+    const { isLoading } = usePatients()
 
     const context = useContext()
 
@@ -74,6 +76,7 @@ export default defineComponent({
     return {
       isDesktopOrTablet,
       isListEmpty,
+      isLoading,
     }
   },
 })

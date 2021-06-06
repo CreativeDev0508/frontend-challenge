@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center">
-    <p class="mr-2 text-sm">Filter by:</p>
+    <p class="mr-2 text-sm sm:(text-base mr-4)">Filter by:</p>
     <button
-      class="mr-2 btn-outline"
+      class="mr-2 btn-outline sm:text-base"
       :class="{
         'bg-primary-500': tag === 'all',
         'text-white': tag === 'all',
@@ -12,7 +12,7 @@
       all
     </button>
     <button
-      class="mr-2 btn-outline"
+      class="mr-2 btn-outline sm:text-base"
       :class="{
         'bg-primary-500': tag === 'female',
         'text-white': tag === 'female',
@@ -22,7 +22,7 @@
       women
     </button>
     <button
-      class="btn-outline"
+      class="btn-outline sm:text-base"
       :class="{
         'bg-primary-500': tag === 'male',
         'text-white': tag === 'male',

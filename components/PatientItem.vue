@@ -1,5 +1,5 @@
 <template>
-  <li class="table-row">
+  <li class="table-row lg:text-lg">
     <div
       v-if="isDesktopOrTablet"
       class="table-cell p-2 border border-primary-500"
@@ -9,23 +9,35 @@
     </div>
     <div
       v-if="isDesktopOrTablet"
-      class="table-cell p-2 border border-primary-500 capitalize"
+      class="table-cell py-2 px-4 border border-primary-500 capitalize"
       data-test="gender"
     >
       {{ patient.gender }}
     </div>
     <div
       v-if="isDesktopOrTablet"
-      class="table-cell p-2 border border-primary-500"
+      class="table-cell py-2 px-4 border border-primary-500"
       data-test="birthday"
     >
       {{ birthday }}
     </div>
     <div
       v-if="isDesktopOrTablet"
-      class="table-cell align-middle p-2 border border-primary-500"
+      class="
+        table-cell
+        align-middle
+        p-2
+        border border-primary-500
+        lg:(py-2
+        px-4)
+      "
     >
-      <button class="underline">View</button>
+      <button
+        class="btn-outline text-base lg:text-lg"
+        @click="selectPatient(patient)"
+      >
+        View
+      </button>
     </div>
 
     <div

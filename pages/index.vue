@@ -11,7 +11,7 @@
       <button class="btn" @click="reloadPage">Reload</button>
     </div>
 
-    <div v-else class="flex w-full flex-col items-center">
+    <div v-else class="flex w-full flex-col items-center md:(my-4)">
       <SearchBar @search="handleSearch" />
       <GenderFilter
         class="my-2 mb-4"
@@ -19,11 +19,11 @@
         @change-filter="handleFilter"
       />
 
-      <PatientsListShimmer v-if="isLoading" />
+      <PatientsListShimmer v-if="shimmer" />
       <PatientsList :patients="patients" />
 
       <button
-        class="btn"
+        class="btn lg:(mt-8)"
         :class="{
           'cursor-not-allowed': isLoading,
           'cursor-pointer': !isLoading,
@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@nuxtjs/composition-api'
+import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
 import usePatients from '@/composables/usePatients'
 import usePatientSearch from '@/composables/usePatientSearch'
 import useGenderFilter from '@/composables/useGenderFilter'
@@ -74,6 +74,7 @@ export default defineComponent({
       patientsMatchingSearchQuery
     )
     const { visible, selectedPatient } = useModal()
+    const shimmer = ref(true)
 
     const handleSearch = (query: string): void => {
       searchQuery.value = query
@@ -87,8 +88,13 @@ export default defineComponent({
       window.location.reload()
     }
 
-    onMounted(() => {
-      getPatients()
+    const stopShimmer = () => {
+      shimmer.value = false
+    }
+
+    onMounted(async () => {
+      await getPatients()
+      stopShimmer()
     })
 
     return {
@@ -102,6 +108,7 @@ export default defineComponent({
       currentTag,
       visible,
       selectedPatient,
+      shimmer,
     }
   },
 })

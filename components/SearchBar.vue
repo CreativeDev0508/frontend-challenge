@@ -33,6 +33,8 @@
         outline-none)
         transition-colors
       "
+      aria-label="search"
+      title="Search"
       @click="handleSearch"
     >
       <svg

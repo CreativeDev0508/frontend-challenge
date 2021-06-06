@@ -3,10 +3,11 @@ import { ref, useContext } from '@nuxtjs/composition-api'
 import countries from 'i18n-iso-countries'
 import { Patient } from '~/components/types'
 
+const isLoading = ref(true)
+
 export default function usePatients() {
   const patients = ref<Patient[]>([])
   const page = ref(0)
-  const isLoading = ref(true)
   const error = ref(false)
 
   const { $axios } = useContext()

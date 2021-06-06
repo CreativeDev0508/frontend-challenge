@@ -41,7 +41,8 @@
           transition-all
           sm:my-8
           sm:align-middle
-          sm:max-w-lg
+          sm:max-w-md
+          lg:max-w-lg
         "
       >
         <slot></slot>
