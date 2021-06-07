@@ -16,6 +16,7 @@
         transition-colors
       "
       placeholder="Search by name or country"
+      data-test="searchbar"
       @keydown.enter="handleSearch"
     />
     <button
@@ -35,6 +36,7 @@
       "
       aria-label="search"
       title="Search"
+      data-test="search-button"
       @click="handleSearch"
     >
       <svg

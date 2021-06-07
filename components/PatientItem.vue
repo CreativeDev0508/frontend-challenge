@@ -34,6 +34,7 @@
     >
       <button
         class="btn-outline text-base lg:text-lg"
+        data-test="details-button"
         @click="selectPatient(patient)"
       >
         View
@@ -56,6 +57,7 @@
     >
       <button
         class="btn-outline text-xl underline border-none"
+        data-test="details-button"
         @click="selectPatient(patient)"
       >
         View

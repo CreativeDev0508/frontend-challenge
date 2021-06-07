@@ -7,6 +7,7 @@
         'bg-primary-500': tag === 'all',
         'text-white': tag === 'all',
       }"
+      data-test="all-tag"
       @click="handleTagChange('all')"
     >
       all
@@ -17,6 +18,7 @@
         'bg-primary-500': tag === 'female',
         'text-white': tag === 'female',
       }"
+      data-test="female-tag"
       @click="handleTagChange('female')"
     >
       women
@@ -27,6 +29,7 @@
         'bg-primary-500': tag === 'male',
         'text-white': tag === 'male',
       }"
+      data-test="male-tag"
       @click="handleTagChange('male')"
     >
       men

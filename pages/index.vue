@@ -29,6 +29,7 @@
           'cursor-pointer': !isLoading,
         }"
         :disabled="isLoading"
+        data-test="load-more-button"
         @click="getPatients"
       >
         <svg

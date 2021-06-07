@@ -3,6 +3,7 @@
     <div
       v-if="isDesktopOrTablet"
       class="mt-4 text-center border-collapse w-full max-w-lg lg:max-w-xl"
+      data-test="shimmer-list"
     >
       <div class="table-header-group border border-primary-500">
         <div class="table-row font-semibold bg-primary-500 text-white">
@@ -80,7 +81,11 @@
       </ul>
     </div>
 
-    <div v-else class="w-full table text-center border-collapse">
+    <div
+      v-else
+      class="w-full table text-center border-collapse"
+      data-test="shimmer-list"
+    >
       <div class="table-header-group border border-primary-500">
         <div class="table-row font-semibold bg-primary-500 text-white">
           <div class="table-cell p-2 border-r border-white">Patient</div>

@@ -7,6 +7,7 @@
       bg-white
       border-3 border-primary-500
     "
+    data-test="patient-details"
   >
     <div class="w-full p-2 flex justify-end">
       <div
@@ -36,6 +37,7 @@
         class="btn-outline border-none p-0"
         aria-label="close"
         title="Close"
+        data-test="close-button"
         @click="hideModal"
       >
         <svg
