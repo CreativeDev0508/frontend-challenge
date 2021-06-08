@@ -29,6 +29,7 @@
           :src="patient.picture.large"
           :alt="`${patient.fullName}\'s photo`"
           class="w-full h-full object-contain"
+          data-test="details-photo"
         />
       </div>
 
@@ -93,11 +94,15 @@
     </div>
 
     <div class="mt-6 text-center lg:mt-10">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl" data-test="details-name">
         <span class="font-semibold">{{ patient.name.first }}</span>
         <span>{{ patient.name.last }}</span>
       </h2>
-      <p v-if="patient.id.value" class="text-sm sm:text-base lg:text-lg">
+      <p
+        v-if="patient.id.value"
+        class="text-sm sm:text-base lg:text-lg"
+        data-test="details-id"
+      >
         {{ patient.id.name }} - {{ patient.id.value }}
       </p>
     </div>
@@ -111,9 +116,13 @@
           Personal
         </h3>
         <div class="text-sm space-y-1 sm:text-base lg:text-lg">
-          <p class="capitalize">{{ patient.gender }}</p>
-          <p>Birthday: {{ birthday }}</p>
-          <p>Nationality: {{ patient.nat }}</p>
+          <p class="capitalize" data-test="details-gender">
+            {{ patient.gender }}
+          </p>
+          <p data-test="details-dob">Birthday: {{ birthday }}</p>
+          <p data-test="details-nationality">
+            Nationality: {{ patient.location.country }}
+          </p>
         </div>
       </div>
     </div>
@@ -125,9 +134,11 @@
       <div class="p-2">
         <h3 class="mb-2 text-lg font-semibold underline lg:text-xl">Contact</h3>
         <div class="text-sm space-y-1 sm:text-base lg:text-lg">
-          <p class="capitalize">{{ patient.email }}</p>
-          <p>Phone: {{ patient.phone }}</p>
-          <p>Address: {{ address }}</p>
+          <p class="capitalize" data-test="details-email">
+            {{ patient.email }}
+          </p>
+          <p data-test="details-phone">Phone: {{ patient.phone }}</p>
+          <p data-test="details-address">Address: {{ address }}</p>
         </div>
       </div>
     </div>
@@ -140,10 +151,12 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api'
+import Logo from '@/components/Logo.vue'
 import useModal from '@/composables/useModal'
 import { Patient } from './types'
 
 export default defineComponent({
+  components: { Logo },
   props: {
     patient: {
       type: Object as () => Patient,
