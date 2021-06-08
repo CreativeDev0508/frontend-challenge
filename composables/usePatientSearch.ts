@@ -7,7 +7,7 @@ export default function usePatientSearch(patients: Ref<Patient[]>) {
     return patients.value.filter(
       (patient: Patient) =>
         patient.fullName.toLowerCase().includes(searchQuery.value) ||
-        patient.nat.toLowerCase().includes(searchQuery.value)
+        patient.location.country.toLowerCase().includes(searchQuery.value)
     )
   })
 

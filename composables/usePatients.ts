@@ -1,6 +1,5 @@
 import { fetchPatients } from '@/api/patients'
 import { ref, useContext } from '@nuxtjs/composition-api'
-import countries from 'i18n-iso-countries'
 import { Patient } from '@/components/types'
 
 const isLoading = ref(true)
@@ -11,7 +10,6 @@ export default function usePatients() {
   const error = ref(false)
 
   const { $axios } = useContext()
-  countries.registerLocale(require('i18n-iso-countries/langs/en.json'))
 
   const getPatients = async () => {
     page.value += 1
@@ -26,7 +24,6 @@ export default function usePatients() {
         const updatedPatients = additionalPatients.map((patient) => ({
           ...patient,
           fullName: `${patient.name.first} ${patient.name.last}`,
-          nat: countries.getName(patient.nat, 'en'),
         }))
 
         patients.value.push(...updatedPatients)
