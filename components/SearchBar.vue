@@ -1,10 +1,12 @@
 <template>
   <div class="relative">
+    <label for="searchbar" class="sr-only">Search Patients:</label>
     <input
       id="searchbar"
       v-model="searchQuery"
       type="search"
       class="
+        block
         w-full
         pl-3
         pr-10
@@ -44,6 +46,8 @@
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        role="img"
+        aria-label="Search icon"
       >
         <path
           stroke-linecap="round"

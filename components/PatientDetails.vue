@@ -36,7 +36,6 @@
       <button
         v-focus
         class="btn-outline border-none p-0"
-        aria-label="close"
         title="Close"
         data-test="close-button"
         @click="hideModal"
@@ -46,6 +45,8 @@
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          role="img"
+          aria-label="close"
         >
           <path
             stroke-linecap="round"
@@ -69,7 +70,12 @@
         right-4)
       "
     >
-      <svg class="opacity-20" viewBox="0 0 124 124" fill="none">
+      <svg
+        class="opacity-20"
+        viewBox="0 0 124 124"
+        fill="none"
+        aria-hidden="true"
+      >
         <path
           d="M62 103.204C60.8661 103.201 59.7561 102.878 58.7967 102.274L31 85.8184C30.2191 85.3675 29.5698 84.7202 29.1166 83.9407C28.6634 83.1612 28.4221 82.2767 28.4167 81.375V42.625C28.4221 41.7234 28.6634 40.8388 29.1166 40.0593C29.5698 39.2798 30.2191 38.6325 31 38.1817L59.0033 21.6483C59.9238 21.0949 60.9776 20.8025 62.0517 20.8025C63.1257 20.8025 64.1795 21.0949 65.1 21.6483L93 38.1817C93.7809 38.6325 94.4302 39.2798 94.8834 40.0593C95.3366 40.8388 95.5779 41.7234 95.5833 42.625V80.9358C95.5859 81.9436 95.3309 82.9354 94.8426 83.817C94.3544 84.6986 93.6489 85.4408 92.7933 85.9734L65.0483 102.352C64.1346 102.921 63.0767 103.217 62 103.204ZM59.83 93.4134H59.6233H59.83ZM63.9892 93.4134H64.17H63.9892ZM38.75 78.43L62 92.1475L85.25 78.43V45.57L62 31.8525L38.75 45.57V78.43ZM64.3508 30.4575H64.1442H64.3508Z"
           fill="#21F3B4"
@@ -94,7 +100,11 @@
     </div>
 
     <div class="mt-6 text-center lg:mt-10">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl" data-test="details-name">
+      <h2
+        id="modal-title"
+        class="text-2xl sm:text-3xl lg:text-4xl"
+        data-test="details-name"
+      >
         <span class="font-semibold">{{ patient.name.first }}</span>
         <span>{{ patient.name.last }}</span>
       </h2>

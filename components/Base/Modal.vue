@@ -47,7 +47,6 @@
       >
         <slot></slot>
       </div>
-      <button aria-label="close" @click="hideModal"></button>
     </div>
   </div>
 </template>
