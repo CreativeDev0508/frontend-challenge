@@ -1,6 +1,11 @@
 describe('PatientList', () => {
   it('displays a shimmer patient list while loading', () => {
-    cy.visit('/').get('[data-test="shimmer-list"]').should('exist', true)
+    cy.visit('/')
+      .get('[data-test="shimmer-list"]')
+      .should('exist')
+      .get('[data-test="load-more-button"]')
+      .should('be.disabled')
+    cy.get('[data-test="shimmer-list"]').should('not.exist')
   })
 
   it('renders a list of patients', () => {
@@ -10,6 +15,8 @@ describe('PatientList', () => {
   it('loads more patients', () => {
     cy.get('[data-test="load-more-button"]')
       .click()
+      .get('[data-test="load-more-button"]')
+      .should('be.disabled')
       .get('[data-test="name"]')
       .should('have.length', 100)
   })
@@ -74,7 +81,7 @@ describe('PatientDetails', () => {
       .contains('FN - 05067837713')
       .get('[data-test="close-button"]')
       .click()
-      .should('not.exist', true)
+      .should('not.exist')
   })
 })
 
@@ -83,6 +90,8 @@ describe('Accessibity', () => {
     cy.get('[data-test="load-more-button"]')
       .focus()
       .type('{enter}')
+      .get('[data-test="load-more-button"]')
+      .should('be.disabled')
       .get('[data-test="name"]')
       .should('have.length', 150)
   })
@@ -112,6 +121,6 @@ describe('Accessibity', () => {
       .focus()
       .type('{enter}')
       .get('[data-test="patient-details"]')
-      .should('not.exist', true)
+      .should('not.exist')
   })
 })
