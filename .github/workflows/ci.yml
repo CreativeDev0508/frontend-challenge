@@ -46,7 +46,16 @@ jobs:
         run: yarn
 
       - name: Run linter 👀
+        if: ${{ !env.ACT }}
         run: yarn lint
 
       - name: Run tests 🧪
+        if: ${{ !env.ACT }}
         run: yarn test:unit
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          headless: true
+          build: yarn build
+          start: yarn start
