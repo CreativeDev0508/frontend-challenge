@@ -1,7 +1,7 @@
 import { ref, computed, Ref } from '@nuxtjs/composition-api'
 import { Patient } from '@/components/types'
 
-export default function usePatientSearch(patients: Ref<Patient[]>) {
+export default function usePatientSearch(patients: Ref<Readonly<Patient[]>>) {
   const searchQuery = ref('')
   const patientsMatchingSearchQuery = computed(() => {
     return patients.value.filter(

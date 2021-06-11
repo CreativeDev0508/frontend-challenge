@@ -1,11 +1,11 @@
 <template>
   <tr class="lg:text-lg">
     <td class="text-center p-2 border border-primary-500 sm:hidden">
-      <p class="text-lg font-semibold" data-test="name">
+      <p class="text-lg font-semibold">
         {{ patient.fullName }}
       </p>
-      <span class="capitalize" data-test="gender">{{ patient.gender }} - </span>
-      <span data-test="birthday">{{ birthday }}</span>
+      <span class="capitalize">{{ patient.gender }} - </span>
+      <span>{{ birthday }}</span>
     </td>
     <td
       class="hidden p-2 border border-primary-500 sm:table-cell"

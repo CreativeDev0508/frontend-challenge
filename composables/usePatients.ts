@@ -1,14 +1,13 @@
 import { fetchPatients } from '@/api/patients'
-import { ref, useContext } from '@nuxtjs/composition-api'
+import { readonly, ref, useContext } from '@nuxtjs/composition-api'
 import { Patient } from '@/components/types'
 
 const isLoading = ref(true)
+const patients = ref<Patient[]>([])
+const page = ref(0)
+const error = ref(false)
 
 export default function usePatients() {
-  const patients = ref<Patient[]>([])
-  const page = ref(0)
-  const error = ref(false)
-
   const { $axios } = useContext()
 
   const getPatients = async () => {
@@ -37,8 +36,8 @@ export default function usePatients() {
 
   return {
     getPatients,
-    patients,
-    isLoading,
-    error,
+    patients: readonly(patients),
+    isLoading: readonly(isLoading),
+    error: readonly(error),
   }
 }
