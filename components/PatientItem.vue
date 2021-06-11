@@ -1,73 +1,51 @@
 <template>
-  <li class="table-row lg:text-lg">
-    <div
-      v-if="isDesktopOrTablet"
-      class="table-cell p-2 border border-primary-500"
-      data-test="name"
-    >
-      {{ patient.fullName }}
-    </div>
-    <div
-      v-if="isDesktopOrTablet"
-      class="table-cell py-2 px-4 border border-primary-500 capitalize"
-      data-test="gender"
-    >
-      {{ patient.gender }}
-    </div>
-    <div
-      v-if="isDesktopOrTablet"
-      class="table-cell py-2 px-4 border border-primary-500"
-      data-test="birthday"
-    >
-      {{ birthday }}
-    </div>
-    <div
-      v-if="isDesktopOrTablet"
-      class="
-        table-cell
-        align-middle
-        p-2
-        border border-primary-500
-        lg:(py-2
-        px-4)
-      "
-    >
-      <button
-        class="btn-outline text-base lg:text-lg"
-        data-test="details-button"
-        @click="selectPatient(patient)"
-      >
-        View
-      </button>
-    </div>
-
-    <div
-      v-if="!isDesktopOrTablet"
-      class="table-cell text-center p-2 border border-primary-500"
-    >
+  <tr class="lg:text-lg">
+    <td class="text-center p-2 border border-primary-500 sm:hidden">
       <p class="text-lg font-semibold" data-test="name">
         {{ patient.fullName }}
       </p>
       <span class="capitalize" data-test="gender">{{ patient.gender }} - </span>
       <span data-test="birthday">{{ birthday }}</span>
-    </div>
-    <div
-      v-if="!isDesktopOrTablet"
-      class="table-cell align-middle text-center p-2 border border-primary-500"
+    </td>
+    <td
+      class="hidden p-2 border border-primary-500 sm:table-cell"
+      data-test="name"
     >
+      {{ patient.fullName }}
+    </td>
+    <td
+      class="
+        hidden
+        py-2
+        px-4
+        border border-primary-500
+        capitalize
+        sm:table-cell
+      "
+      data-test="gender"
+    >
+      {{ patient.gender }}
+    </td>
+    <td
+      class="hidden py-2 px-4 border border-primary-500 sm:table-cell"
+      data-test="birthday"
+    >
+      {{ birthday }}
+    </td>
+    <td class="align-middle p-2 border border-primary-500 lg:(py-2 px-4)">
       <button
-        class="btn-outline text-xl underline border-none"
+        class="btn-outline text-lg"
         data-test="details-button"
         @click="selectPatient(patient)"
       >
         View
       </button>
-    </div>
-  </li>
+    </td>
+  </tr>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, useContext } from '@nuxtjs/composition-api'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
 import useModal from '@/composables/useModal'
 import { Patient } from './types'
 
@@ -80,9 +58,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const context = useContext()
     const { selectPatient } = useModal()
-    const isDesktopOrTablet = context.$device.isDesktopOrTablet
 
     const birthday = computed(() => {
       const [year, month, day] = props.patient.dob.date.split('-')
@@ -90,7 +66,6 @@ export default defineComponent({
     })
 
     return {
-      isDesktopOrTablet,
       birthday,
       selectPatient,
     }

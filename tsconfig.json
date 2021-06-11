@@ -20,7 +20,6 @@
       "@nuxtjs/axios",
       "@types/node",
       "@types/jest",
-      "@nuxtjs/device",
       "cypress"
     ]
   },
