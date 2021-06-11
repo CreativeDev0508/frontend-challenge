@@ -7,9 +7,9 @@
 </h2>
 
 <p align="center">
-<img src="https://res.cloudinary.com/voss/image/upload/v1623336916/readme_logos/pharmainc-desktop_cvdov0.png" alt="Pharma Inc Desktop" width="50%" />
+<img src="https://res.cloudinary.com/voss/image/upload/v1623430433/readme_logos/pharmainc-desktop_usk9py.png" alt="Pharma Inc Desktop" width="57%" />
     &nbsp; &nbsp; &nbsp; &nbsp;
-    <img src="https://res.cloudinary.com/voss/image/upload/v1623336916/readme_logos/pharmainc-mobile_fb0bpm.png" alt="Pharma Inc Mobile" width="27%" />
+    <img src="https://res.cloudinary.com/voss/image/upload/v1623430433/readme_logos/pharmainc-mobile_wbaqew.png" alt="Pharma Inc Mobile" width="32%" />
 </p>
 
 Veja o resultado final em:
