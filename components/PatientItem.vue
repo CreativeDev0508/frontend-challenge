@@ -36,6 +36,7 @@
       <button
         class="btn-outline text-lg"
         data-test="details-button"
+        title="See details"
         @click="selectPatient(patient)"
       >
         View

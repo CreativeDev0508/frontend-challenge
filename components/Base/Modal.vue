@@ -34,9 +34,9 @@
           w-full
           inline-block
           align-bottom
-          bg-white
           text-left
           shadow-xl
+          rounded-3xl
           transform
           transition-all
           sm:my-8
